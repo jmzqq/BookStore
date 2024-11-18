@@ -1,9 +1,12 @@
 ﻿using Bookstore.Controllers;
 using Bookstore.Data;
 using Bookstore.Models;
+using Bookstore.Services.Exceptions;
+using Humanizer.Localisation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyModel;
 using System.ComponentModel;
+using System.Data;
 
 namespace Bookstore.Services
 {
@@ -43,6 +46,27 @@ namespace Bookstore.Services
 			catch (DbUpdateException ex)
 			{
 				throw new IntegrityException(ex.Message);
+			}
+		}
+
+		public async Task UpdateAsync(Genre genreEdited)
+		{
+            //Confere se tem alguém com id (não usa o FindAsync(id), pq ele vai retornar um gênero, sendo que nesse metódo é só pra retornar se existe ou não um gênero
+            bool hasAny = await _context.Genres.AnyAsync(x => x.Id == genreEdited.Id);
+			//Execeção se não tiver
+			if (!hasAny) 
+			{
+				throw new NotFoundException("Id não encontrado");
+			}
+
+            try
+			{
+				_context.Update(genreEdited);
+				await _context.SaveChangesAsync();
+            }
+			catch (DbUpdateConcurrencyException ex) 
+			{
+				throw new DbConcurrencyException(ex.Message);
 			}
 		}
 	}

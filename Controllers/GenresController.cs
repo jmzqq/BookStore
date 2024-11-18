@@ -26,25 +26,80 @@ namespace Bookstore.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Delete(int id)
-		{
+        public async Task<IActionResult> Delete(int id)
+        {
             if (!ModelState.IsValid)
             {
                 return View();
             }
 
-			try
-			{
-				await _service.RemoveAsync(id);
-				return RedirectToAction(nameof(Index));
-			}
-			catch (IntegrityException ex)
-			{
-				return RedirectToAction(nameof(Error), new { Message = ex.Message });
-			}
+            try
+            {
+                await _service.RemoveAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (IntegrityException ex)
+            {
+                return RedirectToAction(nameof(Error), new { Message = ex.Message });
+            }
         }
 
-		public async Task<IActionResult> Create(Genre genre)
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id is null)
+            {
+                return RedirectToAction(nameof(Error), new { Message = "Id não foi fornecido" });
+            }
+            Genre genre = await _service.FindByIdAsync(id.Value);
+            if (genre is null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id não foi encontrado" });
+            }
+
+            return View(genre);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public async Task<IActionResult> Edit(int id, Genre genre)
+		{
+			if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+			if (id != genre.Id)
+			{
+				return RedirectToAction(nameof(Error), new { message = "ID's não condizem" });
+			}
+
+			try
+			{
+				await _service.UpdateAsync(genre);
+				return RedirectToAction(nameof(Index));
+			}
+			catch (ApplicationException ex) 
+			{
+				return RedirectToAction(nameof(Error), new { message = ex.Message}	);
+			}
+        }
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id is null)
+            {
+                return RedirectToAction(nameof(Error), new { Message = "Id não foi fornecido" });
+            }
+            Genre genre = await _service.FindByIdAsync(id.Value);
+            if (genre is null)
+            {
+                return RedirectToAction(nameof(Error), new { message = "Id não foi encontrado" });
+            }
+
+            return View(genre);
+        }
+
+        public async Task<IActionResult> Create(Genre genre)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -56,22 +111,6 @@ namespace Bookstore.Controllers
 			return RedirectToAction(nameof(Index));
 		}
 
-		public async Task<IActionResult> Delete(int? id)
-		{
-			if (id is null)
-			{
-				return RedirectToAction(nameof(Error), new { Message = "Id não foi fornecido" });
-			}
-			Genre genre = await _service.FindByIdAsync(id.Value);
-            if (genre is null)
-            {
-                return RedirectToAction(nameof(Error),
-                    new { message = "Id não foi encontrado" });
-            }
-
-			return View(genre);
-        }
-
         public IActionResult Error(string message)
         {
 			var viewModel = new ErrorViewModel
@@ -82,5 +121,7 @@ namespace Bookstore.Controllers
 
 			return View(viewModel);
         }
+
+        
     }
 }
