@@ -105,7 +105,7 @@ namespace Bookstore.Controllers
             {
                 return RedirectToAction(nameof(Error), new { Message = "Id não foi fornecido" });
             }
-            Genre genre = await _service.FindByIdAsync(id.Value);
+            Genre genre = await _service.Details(id.Value);
             if (genre is null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não foi encontrado" });
