@@ -1,14 +1,71 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<Bookstore.Models.Book>
+
 @{
+    ViewData["Title"] = "Livros";
 }
 
-<h1>Livros!</h1>
-<a
-   type="button"
-   title="Detalhes"
-   class="btn btn-outline-info px-2 py-1 rounded mx-1"
->
-    <i class="bi bi-list-ul"></i>
-</a>
+<h1>Livros</h1>
+
+<p>
+    <a asp-action="Create" class="text-decoration-none">Adicionar novo Livro</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReleaseYear)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReleaseYear)
+            </td>
+            <td>
+                    <a type="button"
+					   title="Detalhes"
+					   class="btn btn-outline-info px-2 py-1 rounded mx-1"
+					   asp-action="Details"
+                       asp-route-id="@item.Id">
+						<i class="bi bi-list-ul"></i>
+					</a>
+					<a type="button"
+					   title="Editar"
+					   class="btn btn-outline-warning px-2 py-1 rounded mx-1"
+					   asp-action="Edit"
+                       asp-route-id="@item.Id">
+						<i class="bi bi-pencil-fill"></i>
+					</a>
+					<a type="button"
+					   title="Apagar"
+					   class="btn btn-outline-danger px-2 py-1 rounded mx-1"
+					   asp-action="Delete"
+                       asp-route-id="@item.Id">
+						<i class="bi bi-trash-fill"></i>
+					</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
