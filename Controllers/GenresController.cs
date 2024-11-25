@@ -99,6 +99,18 @@ namespace Bookstore.Controllers
             return View(genre);
         }
 
+        public async Task<IActionResult> Details(int id)
+        {
+            Genre genre = await _service.Details(id);
+
+            if (genre == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(genre);
+        }
+
         public async Task<IActionResult> Create(Genre genre)
 		{
 			if (!ModelState.IsValid)

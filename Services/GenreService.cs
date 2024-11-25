@@ -49,7 +49,12 @@ namespace Bookstore.Services
 			}
 		}
 
-		public async Task UpdateAsync(Genre genreEdited)
+        public async Task<Genre> Details(int id)
+        {
+            return await _context.Genres.Include(gen => gen.Books).FirstOrDefaultAsync(gen => gen.Id == id);
+        }
+
+        public async Task UpdateAsync(Genre genreEdited)
 		{
             //Confere se tem alguém com id (não usa o FindAsync(id), pq ele vai retornar um gênero, sendo que nesse metódo é só pra retornar se existe ou não um gênero
             bool hasAny = await _context.Genres.AnyAsync(x => x.Id == genreEdited.Id);

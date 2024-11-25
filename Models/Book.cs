@@ -25,7 +25,7 @@ namespace Bookstore.Models
         public int ReleaseYear { get; set; }
 
         [Display(Name = "Gêneros Literários")]
-        public ICollection<Genre> Genres { get; set; }
+        public ICollection<Genre> Genres { get; set; } = new List<Genre>();
 
         public Book()
         {
