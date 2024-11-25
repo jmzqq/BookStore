@@ -4,7 +4,7 @@
   "libraries": [
     {
       "library": "bootstrap-icons@1.11.3",
-      "destination": "wwwroot/lib/boostrap-icons/bootstrap-icons/",
+      "destination": "wwwroot/lib/bootstrap-icons/bootstrap-icons/",
       "files": [
         "font/fonts/bootstrap-icons.woff",
         "font/fonts/bootstrap-icons.woff2",
