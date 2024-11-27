@@ -18,12 +18,12 @@ namespace Bookstore.Services
 
         public async Task<List<Book>> FindAllAsync()
         {
-            return await _context.Books.ToListAsync();
+            return await _context.Books.Include(x => x.Genres).ToListAsync();
         }
 
         public async Task<Book> FindByIdAsync(int id)   
         {
-            return await _context.Books.FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Books.Include(book => book.Genres).FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task InsertAsync(Book book)
@@ -55,7 +55,7 @@ namespace Bookstore.Services
         {
             try
             {
-                var obj = await _context.Books.FindAsync(id);
+                var obj = await _context.Books.Include(book => book.Genres).FirstOrDefaultAsync(book => book.Id == id);
                 _context.Books.Remove(obj);
                 await _context.SaveChangesAsync();
             }
