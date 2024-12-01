@@ -1,0 +1,54 @@
+[33mcommit ac99babc7a74c1584605c0dbfc6e999b08ba6402[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mdevelop[m[33m, [m[1;32mmain[m[33m, [m[1;32mfeature/genres[m[33m)[m
+Author: jmzqq <joaomwguel@gmail.com>
+Date:   Mon Nov 25 15:18:53 2024 -0300
+
+    style: change bootstrap theme
+
+[33mcommit 7d3f8e5a4a73129694f0fef625a4a751c6c546e3[m
+Author: jmzqq <joaomwguel@gmail.com>
+Date:   Mon Nov 25 14:47:32 2024 -0300
+
+    feat: add exception handling to details
+
+[33mcommit 370d97f759ec546eadfd4f8517caf02b691d80df[m
+Merge: ed02821 2df1f7c
+Author: jmzqq <joaomwguel@gmail.com>
+Date:   Mon Nov 25 14:27:20 2024 -0300
+
+    Merge branch 'realease-1.0.0'
+
+[33mcommit 2df1f7c47ccfbc8a831f0a51387a866e7f8f928a[m
+Author: jmzqq <joaomwguel@gmail.com>
+Date:   Mon Nov 25 14:13:55 2024 -0300
+
+    feat: add sedding service
+
+[33mcommit 035fb8ffa62a52b975e4f58d3cdded9025e11dbe[m
+Author: jmzqq <joaomwguel@gmail.com>
+Date:   Mon Nov 18 16:59:09 2024 -0300
+
+    feat: add book model
+
+[33mcommit 734043fbfbdeb427886f5e88df23fb959c165a4b[m
+Author: jmzqq <joaomwguel@gmail.com>
+Date:   Mon Nov 18 16:29:30 2024 -0300
+
+    feat: add edit genre feature
+
+[33mcommit 98b5b364e4743b9489459afa70377603833bb88b[m
+Author: jmzqq <joaomwguel@gmail.com>
+Date:   Wed Nov 13 16:50:04 2024 -0300
+
+    feat: add delete genre feature
+
+[33mcommit 54a38cb0edff145b37ffe7ea1253dc4fe8eae243[m
+Author: jmzqq <joaomwguel@gmail.com>
+Date:   Mon Nov 11 14:35:17 2024 -0300
+
+    feat: implements index and create genre features
+
+[33mcommit ed02821d7ae121c0732f7232740187439a3f78d9[m
+Author: jmzqq <joaomwguel@gmail.com>
+Date:   Wed Oct 30 17:02:03 2024 -0300
+
+    feat: add connection to database
